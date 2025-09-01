@@ -10,13 +10,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 👉 SIN 'cache: pnpm' aquí
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      # Activa pnpm con Corepack para que esté en PATH
       - name: Enable pnpm via Corepack
         run: |
           corepack enable
@@ -26,15 +24,14 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile=false
 
-      # 1) Construye paquetes compartidos
+      # 1) Construye paquetes que TENGAN script build (salta los que no)
       - name: Build shared packages
-        run: pnpm -r --filter ./packages/* run build
+        run: pnpm -r --filter "./packages/*" --if-present run build
 
-      # 2) Construye las apps
+      # 2) Construye apps (todas tienen build)
       - name: Build apps
-        run: pnpm -r --filter ./apps/* run build
+        run: pnpm -r --filter "./apps/*" run build
 
-      # Por ahora, dejamos lint y tests en no-op
       - name: Lint (skip for now)
         run: echo "skip lint"
       - name: Test (skip for now)
