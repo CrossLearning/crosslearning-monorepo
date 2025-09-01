@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "@cross/ui";
 import { track } from "@cross/analytics";
-
 export default function App() {
   return (
     <div style={ padding: 24 }>
