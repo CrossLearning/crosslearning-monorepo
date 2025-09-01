@@ -15,8 +15,10 @@
     "@cross/analytics": "workspace:*"
   },
   "devDependencies": {
-    "vite": "^5.2.0",
-    "@vitejs/plugin-react": "^4.3.0",
-    "typescript": "^5.4.0"
-  }
+  "vite": "^5.2.0",
+  "@vitejs/plugin-react": "^4.3.0",
+  "typescript": "^5.4.0",
+  "@types/react": "^18.0.0",
+  "@types/react-dom": "^18.0.0",
+  "@cross/config": "workspace:*"
 }
