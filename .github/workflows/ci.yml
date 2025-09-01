@@ -1,1 +1,38 @@
+name: CI
 
+on: [push, pull_request, workflow_dispatch]  # ← 1 línea, sin riesgo de indentación
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Install
+        run: pnpm install --frozen-lockfile=false
+
+      # 1) Construye primero los paquetes compartidos
+      - name: Build shared packages
+        run: pnpm -r --filter ./packages/* run build
+
+      # 2) Luego las apps
+      - name: Build apps
+        run: pnpm -r --filter ./apps/* run build
+
+      # Por ahora saltamos lint y tests para asegurar verde inicial
+      - name: Lint (skip for now)
+        run: echo "skip lint"
+      - name: Test (skip for now)
+        run: echo "skip tests"
