@@ -1,7 +1,18 @@
 {
-  "name": "@cross/config",
-  "version": "0.0.1",
-  "private": true,
-  "main": "tsconfig.base.json",
-  "files": ["tsconfig.base.json"]
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "jsx": "react-jsx",
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "composite": true,
+    "baseUrl": "."
+  }
 }
