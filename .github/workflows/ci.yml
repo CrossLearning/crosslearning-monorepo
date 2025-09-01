@@ -24,15 +24,16 @@ jobs:
       - name: Install
         run: pnpm install --frozen-lockfile=false
 
-      # 1) Construye paquetes que TENGAN script build (salta los que no)
+      # Paquetes compartidos (salta los que no tienen script build)
       - name: Build shared packages
         run: pnpm -r --filter "./packages/*" --if-present run build
 
-      # 2) Construye apps (todas tienen build)
-      - name: Build apps
-        run: pnpm -r --filter "./apps/*" run build
-
-      - name: Lint (skip for now)
-        run: echo "skip lint"
-      - name: Test (skip for now)
-        run: echo "skip tests"
+      # --- Apps, una por una ---
+      - name: Build landing
+        run: pnpm --filter "@cross/landing" run build
+      - name: Build bienestar
+        run: pnpm --filter "@cross/bienestar" run build
+      - name: Build lxd
+        run: pnpm --filter "@cross/lxd" run build
+      - name: Build lms
+        run: pnpm --filter "@cross/lms" run build
